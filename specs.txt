@@ -1,0 +1,19 @@
+On veut que l'émulateur :
+ait 32 registres (16 bits)
+un buffer dans la ram de 256x256 pixels pour l'écran, flippé à chaque isntruction
+(=131072 octets) 128 ko
+une ram de 512 ko sur laquelle se trouve le programme
+le program pointer sera donc sur 32 bits
+Le registre 31 est 16 bits et sert de stack pointer.
+le stack commence à l'adresse 0, et en théorie il s'étend.
+On peut choisir l'adresse à laquelle commence un programme
+l'écran : taille 256x256
+de l'adresse 524288 (0x7FFFF) à 65536 plus tôt (0x70000, 458752)
+
+
+lancer :
+step 1 : on parse le programme, on récupère un vector<int8>
+step 2 : on lit les 4 premiers octets, c'est addrStart
+step 3 : on colle tout le programme à la suite de addrStart
+step 4 : on met le program_pointer sur addrStart
+step 5 : c'est tipar fréro

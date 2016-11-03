@@ -1,0 +1,32 @@
+0 00= end of program
+1 01= nop -> instruction qui se contente de passer à l'instru suivante
+2 02= ld rg1 rg2 -> rg1 := rg2
+3 03= ldi rg1 int16 -> rg1 := int16 4o
+4 04= add rg1 rg2 -> rg1 := rg1 + rg2. >int_max:flag
+5 05= addi rg1 int16 -> rg1 := rg1 + int16 4o. >int_max:flag
+6 06= sub rg1 rg2 -> rg1 := rg1 - rg2. <0:flag
+7 07= subi rg1 int16 -> rg1 := rg1 - int16 4o. <0:flag
+8 08= mul rg1 rg2 -> rg1 := rg1*rg2. >int_max:flag
+9 09= div rg1 rg2 -> rg1 := rg1/rg2. rg2==0?flag=1;flag=0
+10 0A= ez rg1 -> rg1==0?flag=1:flag=0 2o -> buggé mais pas nz ???
+11 0B= nz rg1 -> rg1!=0 2o
+12 0C= gz rg1 -> rg1>0 2o
+13 0D= gez rg1 2o
+14 0E= lz rg1 ->  rg1<0 2o
+15 0F= lez rg1 2o
+16 10= flag rg1 -> rg1 := flag 2o
+17 11= or rg1 rg2 -> rg1 := rg1 | rg2
+18 12= ori rg1 int16 -> rg1 := rg1 | int16 4o
+19 13= and rg1 rg2 -> rg1 := rg1 & rg2
+20 14= andi rg1 int16 -> rg1 := rg1 & int16 4o
+21 15= pop rg1 -> rg1 := stack[rg31--] 2o
+22 16= push rg1 -> stack[rg31++] := rg1 2o
+23 17= read rg3 rg1 rg2 -> rg3 := RAM[rg1*65536 + rg2] 4o 
+24 18= write rg3 rg2 rg3 -> RAM[rg1*65536+rg2] := rg3 4o
+25 19= j addr32(label) -> program_pointer := addr32 3o
+26 1A= jf addr32(label) -> (flag)?(program_pointer:=addr32):nop
+27 1B= jr reg1 reg2 -> program_pointer := reg1*65536+reg2
+28 1C= jrf reg1 reg2 -> idm
+29 1D= addr addr32(label) rg1 rg2 -> reg1:=addr32/65536, reg2:=addr32%65536 7o
+30 1E= flip -> machine flipscreen; 1o
+255 FF= disp reg1 -> std::cout << reg1
